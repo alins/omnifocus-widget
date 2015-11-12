@@ -77,7 +77,7 @@ render: (_) -> """
     <div id='todos'></div>
 """
 
-command: "osascript './omnifocusflags.widget/of-flaggedTasks.scpt'"
+command: "osascript -l JavaScript './omnifocusflags.widget/of-flaggedTasks.scpt'"
 
 update: (output, domEl) ->
     if output
@@ -101,9 +101,9 @@ _render: () ->
         @taskList = '<h4 class="of-empty">No Tasks</h4>'
 
 _taskname: (task) =>
-    return '<li class="task"><span class="due">' + task.name + "</span>" if (task.due == true && task.dueToday == false)
-    return  '<li class="task"><span class="due-today">' + task.name + "</span>" if (task.due == true && task.dueToday == true)
-    return '<li class="task">' + task.name if (task.due == false)
+    return '<li class="task"  id="task" name="' + task.id + '"><span class="due">' + task.name + "</span>" if (task.due == true && task.dueToday == false)
+    return  '<li class="task" id="task" name="' + task.id + '"><span class="due-today">' + task.name + "</span>" if (task.due == true && task.dueToday == true)
+    return '<li class="task"  id="task" name="' + task.id + '">' + task.name if (task.due == false)
 _project: (task) =>
     return if (task.project and task.project != 'OmniFocus') then '<span class="task-project">' + task.project + '</span>' else ''
 
